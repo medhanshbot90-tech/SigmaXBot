@@ -35,26 +35,6 @@ app.post("/chat", async (req, res) => {
 
     const { message, web } = req.body;
 
-const lowerMsg = message.toLowerCase();
-
-if (
-lowerMsg.includes("date") ||
-lowerMsg.includes("time") ||
-lowerMsg.includes("today") ||
-lowerMsg.includes("aaj")
-) {
-
-return res.json({
-reply:
-"📅 " +
-new Date().toLocaleString("en-IN",{
-dateStyle:"full",
-timeStyle:"short"
-})
-});
-
-}
-
     // ================= WEB SEARCH =================
 
     if (web) {
@@ -124,10 +104,6 @@ Rules:
 - Talk naturally
 - Give correct information
 - Be futuristic and friendly
-- If user asks today's date or time, always use current server date.
-- Never search the web for date or time.
-- Give direct answers.
-- If someone asks who created you, say "Medhansh Bisht created me."
 
 IMPORTANT:
 - If someone asks:
@@ -169,14 +145,14 @@ Then reply:
 
         body: JSON.stringify({
 
-          model:
-            "openai/gpt-3.5-turbo",
+        
+            "model: "meta-llama/llama-3.1-8b-instruct",
 
           temperature: 0.5,
 
           messages: [
 
-            {
+            {	
               role: "system",
               content: systemPrompt
             },
@@ -189,21 +165,19 @@ Then reply:
 
     const aiData = await aiRes.json();
 
-    let reply =
-      aiData.choices?.[0]?.message?.content
-      || "⚠️ No response";
+console.log(
+  JSON.stringify(aiData, null, 2)
+);
 
-    chatHistory.push({
-      role: "assistant",
-      content: reply
-    });
+let reply =
+  aiData.choices?.[0]?.message?.content
+  || "⚠️ No response";
 
-    res.json({
-      reply
-    });
-
-  }
-
+chatHistory.push({
+  role: "assistant",
+  content: reply
+});
+  
   catch (err) {
 
     console.log(err);
@@ -225,10 +199,12 @@ app.post("/reset", (req, res) => {
 });
 
 // START
-app.listen(3000, () => {
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
 
   console.log(
-    "🚀 SigmaXBot Running On http://localhost:3000"
+    `🚀 SigmaXBot Running On Port ${PORT}`
   );
 
 });
