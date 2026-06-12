@@ -163,7 +163,7 @@ Then reply:
       }
     );
 
-    const aiData = await aiRes.json();
+  const aiData = await aiRes.json();
 
 console.log(
   JSON.stringify(aiData, null, 2)
@@ -172,21 +172,6 @@ console.log(
 let reply =
   aiData.choices?.[0]?.message?.content
   || "⚠️ No response";
-
-chatHistory.push({
-  role: "assistant",
-  content: reply
-});
-  
-  catch (err) {
-
-    console.log(err);
-
-    res.json({
-      reply: "⚠️ Server Error"
-    });
-  }
-});
 
 // RESET
 app.post("/reset", (req, res) => {
