@@ -145,23 +145,20 @@ Then reply:
 
         body: JSON.stringify({
 
-        
-            "model: "meta-llama/llama-3.1-8b-instruct",
+  model: "meta-llama/llama-3.1-8b-instruct",
 
-          temperature: 0.5,
+  temperature: 0.5,
 
-          messages: [
+  messages: [
 
-            {	
-              role: "system",
-              content: systemPrompt
-            },
+    {
+      role: "system",
+      content: systemPrompt
+    },
 
-            ...chatHistory.slice(-8)
-          ]
-        })
-      }
-    );
+    ...chatHistory.slice(-8)
+  ]
+})
 
   const aiData = await aiRes.json();
 
