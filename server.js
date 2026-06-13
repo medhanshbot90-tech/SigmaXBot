@@ -209,7 +209,6 @@ app.post("/reset", (req, res) => {
   res.json({
     success: true
   });
-});
 
 // START
 const PORT = process.env.PORT || 3000;
