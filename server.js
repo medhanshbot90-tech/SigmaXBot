@@ -204,11 +204,6 @@ app.post("/reset", (req, res) => {
   });
 
 });
-  chatHistory = [];
-
-  res.json({
-    success: true
-  });
 
 // START
 const PORT = process.env.PORT || 3000;
