@@ -182,9 +182,28 @@ res.json({
   reply
 });
 
+} catch (err) {
+
+  console.log(err);
+
+  res.json({
+    reply: "⚠️ Server Error"
+  });
+
+}
+
+});
+
 // RESET
 app.post("/reset", (req, res) => {
 
+  chatHistory = [];
+
+  res.json({
+    success: true
+  });
+
+});
   chatHistory = [];
 
   res.json({
