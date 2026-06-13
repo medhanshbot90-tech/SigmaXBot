@@ -143,14 +143,13 @@ Then reply:
             "SigmaXBot"
         },
 
-        body: JSON.stringify({
+       body: JSON.stringify({
 
   model: "meta-llama/llama-3.1-8b-instruct",
 
   temperature: 0.5,
 
   messages: [
-
     {
       role: "system",
       content: systemPrompt
@@ -158,9 +157,13 @@ Then reply:
 
     ...chatHistory.slice(-8)
   ]
+
 })
 
-  const aiData = await aiRes.json();
+      }
+    );
+
+const aiData = await aiRes.json();
 
 console.log(
   JSON.stringify(aiData, null, 2)
@@ -169,6 +172,15 @@ console.log(
 let reply =
   aiData.choices?.[0]?.message?.content
   || "⚠️ No response";
+
+chatHistory.push({
+  role: "assistant",
+  content: reply
+});
+
+res.json({
+  reply
+});
 
 // RESET
 app.post("/reset", (req, res) => {
