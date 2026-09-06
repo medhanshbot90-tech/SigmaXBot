@@ -14,7 +14,7 @@ app.use(express.static(__dirname));
 // ================= API KEYS =================
 
 // 🔑 OPENROUTER KEY
-const OPENROUTER_KEY = process.env.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;
+const OPENROUTER_KEY = process.env.OPENROUTER_KEY;
 	
 // 🔑 TAVILY KEY
 const TAVILY_API_KEY = process.env.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;
